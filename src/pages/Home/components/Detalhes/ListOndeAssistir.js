@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, FlatList, Image } from "react-native";
-import { ApiKey } from "../../../services/apikey";
+import { ApiKey } from "../../../../services/apikey";
 
 export default function ListOndeAssistir({ data}) {
     const [dados, setDados] = useState([]);

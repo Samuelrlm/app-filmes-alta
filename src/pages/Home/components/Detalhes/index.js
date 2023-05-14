@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from "react";
 import { Feather } from "@expo/vector-icons";
-import { Text, View, Image, StyleSheet, ImageBackground, ScrollView, FlatList } from "react-native";
-import { ApiKey } from "../../../services/apikey";
-import ListOndeAssistir from "./ListOndeAssistir";
+import { Text, View, StyleSheet, ImageBackground, ScrollView } from "react-native";
 import CardElenco from "./CardElenco";
+import NotaFilme from "./NotaFilme";
+import ListOndeAssistir from "./ListOndeAssistir";
+import { ApiKey } from "../../../../services/apikey";
+import Trailer from "./Trailer";
 
 
 export default function CardDetalhes({ data }) {
@@ -20,9 +22,7 @@ export default function CardDetalhes({ data }) {
         }
         loadDetalhes();
     }, []);
-    console.log(detalhes.id);
 
-    //pega o tempo de duração do filme e converte para horas e minutos e segundos para finar no formato 1h 30min
     const duracao = detalhes.runtime;
     const horas = Math.floor(duracao / 60);
     const minutos = duracao % 60;
@@ -57,7 +57,17 @@ export default function CardDetalhes({ data }) {
                             <Text style={styles.texto}>{data.overview}</Text>
                         </ScrollView>
                     </View>
-                    
+                    <View style={styles.containerAvaliacao}>
+                        <View style={styles.containerNota}>
+                            <NotaFilme data={data}/>
+                            <View style={styles.containerNotaTexto}>
+                                <Text style={styles.tituloObs}>Avalição dos usuários</Text>
+                            </View>
+                        </View>
+                        <View style={styles.containerTrailer}>
+                            <Trailer />
+                        </View>
+                    </View>
                     <View style={styles.containerObs}>
                         <View style={styles.leftObs}>
                             <Text style={styles.tituloObs}>Gênero</Text>
@@ -157,7 +167,7 @@ const styles = StyleSheet.create({
     },
     containerTexto: {
         width: "100%",
-        minHeight: 100,
+        minHeight: 30,
         maxHeight: 150,
         marginTop: 5,
         paddingEnd: 5,
@@ -176,6 +186,26 @@ const styles = StyleSheet.create({
         flexWrap: "wrap",
         flexDirection: "row",
         gap: 5,        
+    },
+    containerAvaliacao: {
+        width: "100%",
+        marginTop: 10,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingEnd: 5,
+    },
+    containerNota: {
+        width: '60%',
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    containerNotaTexto: {
+        width: "60%",
+    },
+    containerTrailer:{
+        width: "40%",
+        alignItems: "center",
     },
     containerObs: {
         width: "95%",
@@ -205,12 +235,13 @@ const styles = StyleSheet.create({
         textAlign: "center",
     },
     leftObs: {
-        width: "78%",
+        width: "75%",
         justifyContent: "center",
     },
     rightObs: {
-        width: "22%",
+        width: "25%",
         alignItems: "center",
+        paddingEnd:5,
     },
     containerTempo: {
         marginTop: 5,

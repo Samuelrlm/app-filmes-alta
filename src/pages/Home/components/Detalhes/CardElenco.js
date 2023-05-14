@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from "react";
 import { View, Text, Image, StyleSheet, FlatList } from "react-native";
-import { ApiKey } from "../../../services/apikey";
+import { ApiKey } from "../../../../services/apikey";
 
 export default function CardElenco({ data }) {
     const [elenco, setElenco] = useState([]);
